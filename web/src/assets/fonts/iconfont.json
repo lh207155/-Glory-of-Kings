@@ -1,0 +1,44 @@
+{
+  "id": "1748755",
+  "name": "kingHonor",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "721564",
+      "name": "T_menu",
+      "font_class": "menu",
+      "unicode": "e693",
+      "unicode_decimal": 59027
+    },
+    {
+      "icon_id": "178160",
+      "name": "book",
+      "font_class": "book",
+      "unicode": "e614",
+      "unicode_decimal": 58900
+    },
+    {
+      "icon_id": "3676062",
+      "name": "helmet-1",
+      "font_class": "helmet-",
+      "unicode": "e8d9",
+      "unicode_decimal": 59609
+    },
+    {
+      "icon_id": "5911841",
+      "name": "video",
+      "font_class": "video",
+      "unicode": "e60a",
+      "unicode_decimal": 58890
+    },
+    {
+      "icon_id": "13140033",
+      "name": "more read",
+      "font_class": "moreread",
+      "unicode": "e600",
+      "unicode_decimal": 58880
+    }
+  ]
+}
