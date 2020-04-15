@@ -22,6 +22,11 @@ a {
   color: #999;
 }
 
+p {
+  margin: 0;
+  line-height: 1.5em;
+}
+
 @each $colorKey, $color in $colors {
   .text-#{$colorKey} {
     color: $color;

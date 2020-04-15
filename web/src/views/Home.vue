@@ -46,7 +46,9 @@
     <!--end of nav-->
     <m-card title="新闻资讯" icon="menu" :categories="newsCats">
       <template v-slot:default="items">
-        <div
+        <router-link
+          tag="div"
+          :to="`/article/${item._id}`"
           class="d-flex py-2"
           v-for="(item, i) in items.category.newsList"
           :key="i"
@@ -57,6 +59,26 @@
             item.title
           }}</span>
           <span class="fs-xs text-grey">{{ item.createdAt | date }}</span>
+        </router-link>
+      </template>
+    </m-card>
+    <!--英雄-->
+    <m-card title="英雄列表" icon="helmet-" :categories="heroList">
+      <template v-slot:default="items">
+        <div class="d-flex flex-wrap mt-3" style="margin: 0 -0.5rem;">
+          <router-link
+            tag="div"
+            :to="`/heroDetail/${item._id}`"
+            class="text-center"
+            v-for="(item, i) in items.category.heroList"
+            :key="i"
+            style="width: 20%;"
+          >
+            <img :src="item.avatar" class="p-2" style="width: 100%;" />
+            <div class="text-dark" style="margin-top: -0.25rem;">
+              {{ item.name }}
+            </div>
+          </router-link>
         </div>
       </template>
     </m-card>
@@ -135,6 +157,7 @@ export default {
         },
       ],
       newsCats: [],
+      heroList: [],
     };
   },
   components: {},
@@ -143,9 +166,14 @@ export default {
       const res = await this.$http.get("/news/list");
       this.newsCats = res.data;
     },
+    async fetchHeroList() {
+      const res = await this.$http.get("/hero/list");
+      this.heroList = res.data;
+    },
   },
   created() {
     this.fetchNewsList();
+    this.fetchHeroList();
   },
 };
 </script>

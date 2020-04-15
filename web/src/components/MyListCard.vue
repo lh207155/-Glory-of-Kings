@@ -18,6 +18,7 @@
     </div>
     <div class="card-body pt-1">
       <swiper
+        :options="{ autoHeight: true }"
         ref="list"
         @slide-change="
           () => {
@@ -25,7 +26,7 @@
           }
         "
       >
-        <swiper-slide class="mt-2" v-for="(item, i) in categories" :key="i">
+        <swiper-slide v-for="(item, i) in categories" :key="i">
           <!--作用域插槽把每一个类型再传给父组件，在父组件里再循环-->
           <slot :category="item"></slot>
         </swiper-slide>

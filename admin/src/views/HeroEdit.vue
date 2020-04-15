@@ -22,6 +22,22 @@
               <i v-else class="el-icon-plus avatar-uploader-icon"></i>
             </el-upload>
           </el-form-item>
+          <el-form-item label="背景">
+            <el-upload
+              class="avatar-uploader"
+              :action="$http.defaults.baseURL + '/upload'"
+              :headers="getAuthorization()"
+              :show-file-list="false"
+              :on-success="
+                (res) => {
+                  $set(model, 'banner', res.url);
+                }
+              "
+            >
+              <img v-if="model.banner" :src="model.banner" class="avatar" />
+              <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+            </el-upload>
+          </el-form-item>
           <el-form-item label="难度">
             <el-rate
               style="margin-top: 0.6rem;"
@@ -135,6 +151,23 @@
             </el-col>
           </el-row>
         </el-tab-pane>
+        <el-tab-pane label="搭档" name="partner">
+          <el-button @click="model.partners.push({})">添加搭档</el-button>
+          <el-row type="flex" style="flex-wrap: wrap;">
+            <el-col v-for="(item, i) in model.partners" :key="i">
+              <el-form-item :label="`搭档 ${i + 1}`">
+                <el-select v-model="item._id" filterable>
+                  <el-option
+                    v-for="(item, i) in heroList"
+                    :key="i"
+                    :label="item.name"
+                    :value="item._id"
+                  ></el-option>
+                </el-select>
+              </el-form-item>
+            </el-col>
+          </el-row>
+        </el-tab-pane>
       </el-tabs>
       <el-form-item>
         <el-button type="primary" native-type="submit" style="margin-top: 3rem;"
@@ -157,6 +190,7 @@ export default {
       model: {
         name: "",
         avatar: "",
+        banner: "",
         scores: {
           difficult: 0,
           skills: 0,
@@ -165,8 +199,10 @@ export default {
         },
         items1: [],
         items2: [],
+        partners: [],
       },
       categories: [],
+      heroList: [],
     };
   },
   methods: {
@@ -200,8 +236,13 @@ export default {
       const res = await this.$http.get(`rest/items`);
       this.items = res.data;
     },
+    async fetchHeroList() {
+      const res = await this.$http.get("rest/heroes");
+      this.heroList = res.data;
+    },
   },
   created() {
+    this.fetchHeroList();
     this.fetchItems();
     this.fetchCategories();
     this.id && this.fetch();
