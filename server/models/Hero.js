@@ -18,6 +18,8 @@ const schema = new mongoose.Schema({
       name: { type: String },
       description: { type: String },
       tips: { type: String },
+      delay: { type: String },
+      cost: { type: String },
     },
   ],
   items1: [{ type: mongoose.SchemaTypes.ObjectId, ref: "Item" }],

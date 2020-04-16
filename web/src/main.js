@@ -7,12 +7,14 @@ import "./assets/scss/style.scss";
 import router from "./router";
 import axios from "axios";
 import MyListCard from "./components/MyListCard";
+import Card from "./components/Card";
 Vue.prototype.$http = axios.create({
   baseURL: "http://localhost:3000/web/api",
 });
 Vue.config.productionTip = false;
 Vue.use(VueAwesomeSwiper /* { default options with global component } */);
 Vue.component("m-card", MyListCard);
+Vue.component("s-card", Card);
 new Vue({
   router,
   render: (h) => h(App),

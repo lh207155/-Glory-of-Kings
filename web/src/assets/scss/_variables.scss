@@ -16,7 +16,8 @@ $colors: (
         "hard":#805300,
         "skill":#1f3695,
         "attack":#791a16,
-        "survive":#33332c
+        "survive":#33332c,
+        "border": rgb(212,217,222)
 );
 $border-color:map_get($colors,'light-1');
 //font size

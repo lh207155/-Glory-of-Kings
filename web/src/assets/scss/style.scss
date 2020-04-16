@@ -150,6 +150,9 @@ p {
     }
   }
 }
+.border-bottom {
+  border-bottom: 1px solid map_get($colors, "border");
+}
 
 //sprite
 .sprite {

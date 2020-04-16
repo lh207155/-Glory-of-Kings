@@ -21,7 +21,7 @@
             <div class="fs-xl mt-1" style="font-weight: 700;">
               {{ model.name }}
             </div>
-            <div class="fs-xxs mt-1">
+            <div class="fs-xxs mt-1" v-if="model.categories">
               {{
                 model.categories
                   .map((v) => {
@@ -62,8 +62,8 @@
         </div>
       </div>
     </div>
-    <div class="bg-white">
-      <div class="px-3">
+    <div>
+      <div class="px-3 bg-white">
         <div class="nav py-3 bg-white text-center">
           <div class="flex-1">
             <span class="active nav-item">英雄初始</span>
@@ -74,7 +74,7 @@
         </div>
       </div>
       <div class="swiper">
-        <div class="skill p-3">
+        <div class="skill p-3 bg-white">
           <div class="d-flex text-center">
             <div class="heroBtn flex-1 py-3">
               <i class="iconfont icon-menu mr-2 text-primary"></i>
@@ -99,8 +99,59 @@
             <div class="my-4">
               <strong>{{ skillIndex.name }}</strong>
             </div>
-            <div>{{ skillIndex.description }}</div>
+            <div class="des">{{ skillIndex.description }}</div>
           </div>
+        </div>
+        <div class="itemRecommend mt-2">
+          <s-card plain icon="menu" title="出装推荐">
+            <div>
+              <div class="my-2 mb-3"><strong>顺风出装</strong></div>
+              <div class="d-flex">
+                <div v-for="(item, i) in model.items1" :key="i">
+                  <img :src="item.icon" class="itemIcon" />
+                  <span>{{ item.name }}</span>
+                </div>
+              </div>
+            </div>
+            <div class="border-bottom my-3"></div>
+            <div>
+              <div class="my-2 mb-3"><strong>逆风出装</strong></div>
+              <div class="d-flex">
+                <div v-for="(item, i) in model.items2" :key="i">
+                  <img :src="item.icon" class="itemIcon" />
+                  <span>{{ item.name }}</span>
+                </div>
+              </div>
+            </div>
+          </s-card>
+        </div>
+        <div class="usageTip mt-2">
+          <s-card plain icon="menu" title="使用技巧">
+            <div class="des">{{ model.usageTips }}</div>
+          </s-card>
+        </div>
+        <div class="battleTip mt-2">
+          <s-card plain icon="menu" title="对抗技巧">
+            <div class="des">{{ model.battleTips }}</div>
+          </s-card>
+        </div>
+        <div class="teamTip mt-2">
+          <s-card plain icon="menu" title="团战思路">
+            <div class="des">{{ model.teamTips }}</div>
+          </s-card>
+        </div>
+        <div class="relation mt-2" v-if="model.partners">
+          <s-card plain icon="menu" title="英雄关系">
+            <div class="my-2 mb-3"><strong>最佳搭档</strong></div>
+            <div
+              class="d-flex mb-4 ai-center"
+              v-for="item in model.partners"
+              :key="item.name"
+            >
+              <img :src="item.hero.avatar" alt="" />
+              <div class="ml-3">{{ item.description }}</div>
+            </div>
+          </s-card>
         </div>
       </div>
     </div>
@@ -112,7 +163,7 @@ export default {
   name: "Hero",
   data() {
     return {
-      model: {},
+      model: "",
       currentIndex: 0,
     };
   },
@@ -139,6 +190,9 @@ export default {
 <style lang="scss">
 @import "../assets/scss/variables";
 .page-hero {
+  .des {
+    line-height: 1.6rem;
+  }
   .banner {
     height: 50vw;
 
@@ -176,6 +230,15 @@ export default {
         border: 3px solid map-get($colors, "primary");
         border-radius: 45%;
       }
+    }
+  }
+  .itemIcon {
+    width: 4rem;
+    border-radius: 50%;
+  }
+  .relation {
+    img {
+      width: 3.8rem;
     }
   }
 }

@@ -1,11 +1,11 @@
 <template>
   <div class="card p-3 mt-3 bg-white">
-    <div class="card-header d-flex ai-center pb-3">
+    <div class="d-flex ai-center pb-3" :class="{ 'card-header': !plain }">
       <i class="iconfont" :class="`icon-${icon}`"></i>
       <div class="flex-1 ml-2 fs-xl">{{ title }}</div>
-      <i class="iconfont icon-moreread"></i>
+      <i class="iconfont icon-moreread" v-if="!plain"></i>
     </div>
-    <div class="card-body pt-3">
+    <div class="card-body" :class="{ 'pt-3': !plain }">
       <slot></slot>
     </div>
   </div>
@@ -17,6 +17,7 @@ export default {
   props: {
     title: { type: String, required: true },
     icon: { type: String, required: true },
+    plain: { type: Boolean },
   },
 };
 </script>

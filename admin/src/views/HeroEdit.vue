@@ -143,6 +143,12 @@
               <el-form-item label="小提示">
                 <el-input type="textarea" v-model="item.tips"> </el-input>
               </el-form-item>
+              <el-form-item label="冷却时间">
+                <el-input type="text" v-model="item.delay"> </el-input>
+              </el-form-item>
+              <el-form-item label="消耗">
+                <el-input type="text" v-model="item.cost"> </el-input>
+              </el-form-item>
               <el-form-item>
                 <el-button type="danger" @click="model.skills.splice(i, 1)"
                   >删除</el-button
@@ -153,10 +159,15 @@
         </el-tab-pane>
         <el-tab-pane label="搭档" name="partner">
           <el-button @click="model.partners.push({})">添加搭档</el-button>
-          <el-row type="flex" style="flex-wrap: wrap;">
-            <el-col v-for="(item, i) in model.partners" :key="i">
+          <el-row
+            type="flex"
+            style="flex-wrap: wrap;"
+            v-for="(partnersItem, i) in model.partners"
+            :key="i"
+          >
+            <el-col>
               <el-form-item :label="`搭档 ${i + 1}`">
-                <el-select v-model="item._id" filterable>
+                <el-select v-model="partnersItem.hero" filterable>
                   <el-option
                     v-for="(item, i) in heroList"
                     :key="i"
@@ -166,6 +177,16 @@
                 </el-select>
               </el-form-item>
             </el-col>
+            <el-col>
+              <el-form-item label="关系说明">
+                <el-input v-model="partnersItem.description"> </el-input>
+              </el-form-item>
+            </el-col>
+            <el-form-item>
+              <el-button type="danger" @click="model.partners.splice(i, 1)"
+                >删除</el-button
+              >
+            </el-form-item>
           </el-row>
         </el-tab-pane>
       </el-tabs>

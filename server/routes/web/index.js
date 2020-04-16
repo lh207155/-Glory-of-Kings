@@ -915,6 +915,9 @@ module.exports = (app) => {
   router.get("/heroDetail/:id", async (req, res) => {
     const data = await Hero.findById(req.params.id)
       .populate("categories")
+      .populate("items1")
+      .populate("items2")
+      .populate("partners.hero")
       .lean();
     res.send(data);
   });
